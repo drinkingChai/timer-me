@@ -76,6 +76,7 @@ describe('Timer', ()=> {
         },
         name: "My@@    awesome*!$ timer   +)_"
       }).then(timer=> {
+        console.log(timer.url);
         expect(timer).to.be.ok;
       })
     })

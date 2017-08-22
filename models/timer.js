@@ -2,7 +2,7 @@ const conn = require('./_db');
 
 const generateUrl = (name, random = false)=> {
   // regex!
-  return `${name.replace(/([^\w\d ])/g, '').trim().replace(/\s+/g, '_')}${random ? Math.floor(Math.random()*9999) : ''}`;
+  return `${name.replace(/([^\w\d ])/g, '').trim().replace(/([\s_]+)/g, '_')}${random ? Math.floor(Math.random()*9999) : ''}`;
 }
 
 const Timer = conn.define('timer', {
