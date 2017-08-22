@@ -1,7 +1,7 @@
 
 const expect = require('chai').expect;
-const conn = require('../../models');
-const models = conn.models;
+const conn = require('../../models/_db')
+const models = require('../../models').models;
 const Timer = models.Timer;
 
 /*
@@ -13,7 +13,7 @@ const Timer = models.Timer;
 describe('Timer', ()=> {
 
   beforeEach(()=> {
-    return conn.sync();
+    return conn.sync({ force: true });
   })
 
 
@@ -25,25 +25,45 @@ describe('Timer', ()=> {
 
 
   describe('gets', ()=> {
-    it('all timers', ()=> {
-
-
+    let timer1, timer2, timer3;
+    beforeEach(()=> {
+      return Promise.all([
+        Timer.addNewTimer({
+          minute: "56",
+          second: "32",
+          options: {
+            weekdays: "true",
+            weekends: "false"
+          },
+          name: "timer1"
+        }),
+        Timer.addNewTimer({
+          minute: "56",
+          second: "32",
+          name: "timer2"
+        }),
+        Timer.addNewTimer({
+          name: "timer1"
+        })
+      ]).then(timers=> {
+        timer1 = timers[0];
+        timer2 = timers[1];
+        timer3 = timers[2];
+      })
     })
 
     it('a timer by url', ()=> {
-
-
+      return Timer.getTimerData(timer1.url)
+        .then(timer=> {
+          expect(timer).to.be.ok;
+        })
     })
   })
 
 
   describe('create and delete', ()=> {
-    it('generates unique urls', ()=> {
-
-    })
-
     it('creates a new timer', ()=> {
-      return Promise.all([Timer.addNewTimer({
+      return Timer.addNewTimer({
         day: "10",
         month: "8",
         year: "2050",
@@ -55,13 +75,19 @@ describe('Timer', ()=> {
           weekends: "false"
         },
         name: "My@@    awesome*!$ timer   +)_"
-      }), Timer.addNewTimer({
-        name: "My@@    awesome*!$ timer   +)_"
-      })])
+      }).then(timer=> {
+        expect(timer).to.be.ok;
+      })
     })
 
     it('deletes a timer by id', ()=> {
-
+      return Timer.addNewTimer({
+        name: "My@@    awesome*!$ timer   +)_"
+      }).then(timer=> {
+        return Timer.deleteOne(timer.id)
+      }).then(timer=> {
+        expect(timer).to.be.ok;
+      })
     })
   })
 })

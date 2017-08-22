@@ -1,12 +1,8 @@
 const conn = require('./_db');
 
-const generateUrl = (name)=> {
+const generateUrl = (name, random = false)=> {
   // regex!
-  return name.replace(/([^\w\d ])/g, '').trim().replace(/\s+/g, '_');
-}
-
-const generateUrlRandom = (name)=> {
-  return `${generateUrl(name)}_${Math.floor(Math.random()*9999)}`
+  return `${name.replace(/([^\w\d ])/g, '').trim().replace(/\s+/g, '_')}${random ? Math.floor(Math.random()*9999) : ''}`;
 }
 
 const Timer = conn.define('timer', {
@@ -18,38 +14,57 @@ const Timer = conn.define('timer', {
     type: conn.Sequelize.STRING,
     allowNull: false,
     unique: true
+  },
+  weekdays: {
+    type: conn.Sequelize.BOOLEAN,
+    defaultValue: true,
+    allowNull: false
+  },
+  weekends: {
+    type: conn.Sequelize.BOOLEAN,
+    defaultValue: false,
+    allowNull: false
   }
 })
 
 Timer.addNewTimer = data=> {
-  let today = new Date();
-  let date = new Date(
-    data.year || today.getFullYear(),
-    data.month || today.getMonth(),
-    data.date || today.getDate(),
-    data.hours || today.getHours(),
-    data.minutes || today.getMinutes(),
-    data.seconds || today.getSeconds()
-  );
-  let newTimer = Timer.build({
-    expire: date,
-    url: generateUrl(data.name)
-  })
+  let today = new Date(),
+    date = new Date(
+      data.year || today.getFullYear(),
+      data.month || today.getMonth(),
+      data.date || today.getDate(),
+      data.hours || today.getHours(),
+      data.minutes || today.getMinutes(),
+      data.seconds || today.getSeconds()
+    );
 
-  return newTimer.save()
-    .then(null, err=> {
-      let newTimer = Timer.build({
-        expire: date,
-        url: generateUrlRandom(data.name)
-      })
-      return newTimer.save();
+  return Timer.findAll()
+  .then(results=> {
+    let allUrls = results.map(r=>r.url),
+      url = generateUrl(data.name);
+    while(allUrls.includes(url)) {
+      url = generateUrl(data.name, true)
+    }
+
+    return Timer.create({
+      expire: date,
+      url: url
     })
-    .catch(err=> {
-      return err;
-    });
- 
-  // gen url first, then save
-  // return generateUrl(data.name)
+  }).catch(err=> err.message);
+}
+
+Timer.getTimerData = url=> {
+  return Timer.findOne({
+    where: { url: url }
+  }).catch(err=> err.message);
+}
+
+Timer.deleteOne = id=> {
+  return Timer.findOne({
+    where: { id: id }
+  }).then(result=> {
+    return result.destroy();
+  }).catch(err=> err.message);
 }
 
 module.exports = Timer;
