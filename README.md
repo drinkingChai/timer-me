@@ -17,3 +17,4 @@ Timer app to count down.
 
 #### Future
 - User defined patterns
+- Email alerts
