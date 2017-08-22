@@ -17,6 +17,10 @@ app.use(express.static('public'));
 
 app.use(routes);
 
+app.use((err, req, res, next)=> {
+  res.render('error', { err });
+})
+
 
 let port = process.env.PORT || 3500;
 
