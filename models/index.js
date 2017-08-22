@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const conn = require('./_db');
-const db = require('./timer');
+const Timer = require('./timer');
 
 const sync = ()=> {
   return conn.sync();
@@ -9,6 +9,6 @@ const sync = ()=> {
 module.exports = {
   sync,
   models: {
-    db
+    Timer
   }
 };
