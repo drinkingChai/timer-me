@@ -3,7 +3,7 @@ const conn = require('./_db');
 const Timer = require('./timer');
 
 const sync = ()=> {
-  return conn.sync();
+  return conn.sync({ force: true });
 }
 
 module.exports = {

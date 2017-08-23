@@ -1,8 +1,8 @@
 const conn = require('./_db');
 
-const generateUrl = (name, random = false)=> {
+const generateUrl = (title, random = false)=> {
   // regex!
-  return `${name.replace(/([^\w\d ])/g, '').trim().replace(/([\s_]+)/g, '_')}${random ? Math.floor(Math.random()*9999) : ''}`;
+  return `${title.replace(/([^\w\d ])/g, '').trim().replace(/\s+/g, '_')}${random ? `_${Math.floor(Math.random()*9999)}` : ''}`.toLowerCase();
 }
 
 const Timer = conn.define('timer', {
@@ -22,8 +22,15 @@ const Timer = conn.define('timer', {
   },
   weekends: {
     type: conn.Sequelize.BOOLEAN,
-    defaultValue: false,
+    defaultValue: true,
     allowNull: false
+  }
+}, {
+  hooks: {
+    beforeValidate: (timer, options)=> {
+      // options??
+      timer.url = timer.url.trim().length ? timer.url : null;
+    }
   }
 })
 
@@ -41,22 +48,24 @@ Timer.addNewTimer = data=> {
   return Timer.findAll()
   .then(results=> {
     let allUrls = results.map(r=>r.url),
-      url = generateUrl(data.name);
+      url = generateUrl(data.title);
     while(allUrls.includes(url)) {
-      url = generateUrl(data.name, true)
+      url = generateUrl(data.title, true)
     }
 
     return Timer.create({
       expire: date,
       url: url
     })
-  }).catch(err=> err.message);
+  }).then(timer=> {
+    return timer.url;
+  });
 }
 
 Timer.getTimerData = url=> {
   return Timer.findOne({
     where: { url: url }
-  }).catch(err=> err.message);
+  });
 }
 
 Timer.deleteOne = id=> {
@@ -64,7 +73,7 @@ Timer.deleteOne = id=> {
     where: { id: id }
   }).then(result=> {
     return result.destroy();
-  }).catch(err=> err.message);
+  });
 }
 
 module.exports = Timer;
