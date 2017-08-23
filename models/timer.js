@@ -35,15 +35,7 @@ const Timer = conn.define('timer', {
 })
 
 Timer.addNewTimer = data=> {
-  let today = new Date(),
-    date = new Date(
-      data.year || today.getFullYear(),
-      data.month || today.getMonth(),
-      data.date || today.getDate(),
-      data.hours || today.getHours(),
-      data.minutes || today.getMinutes(),
-      data.seconds || today.getSeconds()
-    );
+  let datetime = new Date(`${data.date} ${data.time} ${data.ampm}`)
 
   return Timer.findAll()
   .then(results=> {
@@ -54,7 +46,7 @@ Timer.addNewTimer = data=> {
     }
 
     return Timer.create({
-      expire: date,
+      expire: datetime,
       url: url
     })
   }).then(timer=> {

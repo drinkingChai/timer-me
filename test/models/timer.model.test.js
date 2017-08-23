@@ -29,18 +29,23 @@ describe('Timer', ()=> {
     beforeEach(()=> {
       return Promise.all([
         Timer.addNewTimer({
-          minute: "56",
-          second: "32",
+          date: "10/06/2020",
+          time: "3:05",
+          ampm: "pm",
           weekdays: "true",
           weekends: "false",
           title: "timer1"
         }),
         Timer.addNewTimer({
-          minute: "56",
-          second: "32",
+          date: "2/6/2049",
+          time: "3:05:30",
+          ampm: "am",
           title: "timer2"
         }),
         Timer.addNewTimer({
+          date: "2/16/1932",
+          time: "3:05:30",
+          ampm: "pm",
           title: "timer3"
         })
       ]).then(timerUrls=> {
@@ -62,17 +67,12 @@ describe('Timer', ()=> {
   describe('create and delete', ()=> {
     it('creates a new timer', ()=> {
       return Timer.addNewTimer({
-        day: "10",
-        month: "8",
-        year: "2050",
-        hour: "14",
-        minute: "56",
-        second: "32",
-        options: {
-          weekdays: "true",
-          weekends: "false"
-        },
-        title: "My@@    awesome*!$ timer   +)_"
+        date: "10/06/2020",
+        time: "3:05",
+        ampm: "pm",
+        weekdays: "true",
+        weekends: "false",
+        title: "timer1"
       }).then(timerUrl=> {
         expect(timerUrl).to.be.ok;
       })
@@ -80,7 +80,12 @@ describe('Timer', ()=> {
 
     it('deletes a timer by id', ()=> {
       return Timer.addNewTimer({
-        title: "My@@    awesome*!$ timer   +)_",
+        date: "10/06/2020",
+        time: "3:05",
+        ampm: "pm",
+        weekdays: "true",
+        weekends: "false",
+        title: "timer1"
       }).then(timerUrl=> {
         return Timer.getTimerData(timerUrl)
       }).then(timer=> {
