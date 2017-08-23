@@ -6,6 +6,8 @@ router.get('/', (req, res, next)=> {
 })
 
 router.post('/', (req, res, next)=> {
+  req.body.month -= 1; // month is +1
+  console.log(req.body)
   Timer.addNewTimer(req.body)
     .then((url)=> {
       res.redirect(`/${url}`)

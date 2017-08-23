@@ -36,12 +36,12 @@ const drawTimerForm = config=> {
 
   [
     [$html.find('.name'), 'title', 'text'],
-    [$date, 'month', null, now.getMonth()],
+    [$time, 'hours', null, now.getHours() % 12],
+    [$date, 'month', null, now.getMonth() + 1],
     [$date, 'date', null, now.getDate()],
     [$date, 'year', null, now.getFullYear()],
-    [$time, 'hour', null, now.getHours() % 12],
-    [$time, 'minute', null, now.getMinutes()],
-    [$time, 'second', null, now.getSeconds()]
+    [$time, 'minutes', null, now.getMinutes()],
+    [$time, 'seconds', null, now.getSeconds()]
   ].forEach(input=> {
     drawInput({
       parent: input[0],
