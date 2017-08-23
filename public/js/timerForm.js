@@ -34,22 +34,19 @@ const drawTimerForm = config=> {
     $time = $html.find('.time'),
     $options = $html.find('.options');
 
-  [
-    [$html.find('.name'), 'title', 'text'],
-    [$time, 'hours', null, now.getHours() % 12],
-    [$date, 'month', null, now.getMonth() + 1],
-    [$date, 'date', null, now.getDate()],
-    [$date, 'year', null, now.getFullYear()],
-    [$time, 'minutes', null, now.getMinutes()],
-    [$time, 'seconds', null, now.getSeconds()]
-  ].forEach(input=> {
-    drawInput({
-      parent: input[0],
-      name: input[1],
-      type: input[2] || 'number',
-      default: input[3]
-    })
+  // ^([1-9]|0[1-9]|[1-2][0-2])\/([1-9]|0[1-9]|1[0-9]|2[0-9]|3[0-1])\/([1-9]{2}|[1-9]{3}|[1-9]{4})$ date
+  // ^([1-9]|0[1-9]|1[0-2]):([0-9]|[0-5][0-9])(:([0-5][0-9]|[0-9]))?$ time
+
+  drawRegExInput({
+    parent: $date,
+    regex: /^([1-9]|0[1-9]|[1-2][0-2])\/([1-9]|0[1-9]|1[0-9]|2[0-9]|3[0-1])\/([1-9]{2}|[1-9]{3}|[1-9]{4})$/g
   })
+
+  drawRegExInput({
+    parent: $time,
+    regex: /^([1-9]|0[1-9]|1[0-2]):([0-9]|[0-5][0-9])(:([0-5][0-9]|[0-9]))?$/g
+  })
+
 
   drawOption({
     parent: $time,
@@ -67,18 +64,29 @@ const drawTimerForm = config=> {
   $(config.parent).append($html);
 }
 
-const drawInput = config=> {
+const drawRegExInput = config=> {
   /*
     parent
-    type
-    name
-    default
+    regex
+    draws an input
+    draws a verification text underneath
   */
   let template = `
-    <input name="${config.name}" type="${config.type}" value="${config.default ? config.default : ''}"></input>
+    <div>
+      <input type="text"></input>
+      <div></div>
+    </div>
   `;
 
-  let $html = $(template);
+  let $html = $(template),
+    $input = $html.find('input'),
+    $error = $html.find('div');
+  
+  $html.on('keyup', 'input', function() {
+    if ($input.val().match(config.regex) == null) $error.html('Invalid format!');
+    else $error.html('');
+  })
+
   $(config.parent).append($html);
 }
 
