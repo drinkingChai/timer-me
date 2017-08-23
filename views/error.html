@@ -3,7 +3,11 @@
 {% block content %}
 
 <div class="error">
-  {{ err }}
+  {% if err.message %}
+    {{ err.message }}
+  {% else %}
+    {{ err }}
+  {% endif %}
 </div>
 
 

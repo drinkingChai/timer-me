@@ -33,7 +33,8 @@ const drawTimer = config=> {
 
   const updateTime = ()=> {
     setTimeout(function() {
-      let diff = calcDiff(new Date(), config.to);
+      let now = new Date();
+      let diff = calcDiff(now, config.to);
       $html.empty();
       drawCountDown({ parent: $html, value: diff.seconds });
       drawCountDown({ parent: $html, value: diff.minutes });
@@ -64,19 +65,10 @@ const drawCountDown = config=> {
 // making a second call with ajax D:
 $.getJSON(`/json/${$('timer').data().url}`, data=> {
   // draw timer
-  let now = new Date(),
-    expire = new Date(data.expire),
-    diff = Math.floor((expire - now) / 1000),
-    seconds = diff % 60,
-    minutes = Math.floor(diff / 60) % 60,
-    hours = Math.floor(diff / 60 / 60) % 24,
-    days = Math.floor(diff / 60 / 60 / 24) % 7,
-    weeks = Math.floor(diff / 60 / 60 / 24 / 7);
-
-  // console.log(seconds, minutes, hours, days, weeks);
-
   drawTimer({
     parent: '#timer',
-    to: new Date(data.expire)
+    to: new Date(data.expire),
+    weekdays: data.weekdays,
+    weekends: data.weekends
   })
 })
