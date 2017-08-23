@@ -1,0 +1,7 @@
+const drawTimer = config=> {
+
+}
+
+const drawCountDown = config=> {
+  
+}
