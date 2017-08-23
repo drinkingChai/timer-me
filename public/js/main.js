@@ -1,3 +1,1 @@
-drawTimerForm({
-  parent: '.input'
-})
+

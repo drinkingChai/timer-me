@@ -37,7 +37,7 @@ const drawTimerForm = config=> {
   [
     [$html.find('.name'), 'title', 'text'],
     [$date, 'month', null, now.getMonth()],
-    [$date, 'day', null, now.getDate()],
+    [$date, 'date', null, now.getDate()],
     [$date, 'year', null, now.getFullYear()],
     [$time, 'hour', null, now.getHours() % 12],
     [$time, 'minute', null, now.getMinutes()],

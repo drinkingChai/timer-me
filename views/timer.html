@@ -5,6 +5,11 @@
 Your timer
 <a href="{{ data.url }}">{{data.url}}</a>
 Time left!
-{{ data.expire }}
+<!-- {{ data.expire }} -->
+
+<!-- not to render -->
+<timer data-url={{data.url}}></timer>
+
+<script src="js/timer.js" charset="utf-8"></script>
 
 {% endblock %}

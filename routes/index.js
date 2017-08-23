@@ -19,6 +19,12 @@ router.get('/:url', (req, res, next)=> {
     .catch(next);
 })
 
+router.get('/json/:url', (req, res, next)=> {
+  Timer.getTimerData(req.params.url)
+    .then((data)=> res.json(data))
+    .catch(next);
+})
+
 router.delete('/:id', (req, res, next)=> {
   Timer.deleteOne(req.params.id)
     .then(()=> res.redirect('/'))
