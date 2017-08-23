@@ -17,7 +17,10 @@ router.post('/', (req, res, next)=> {
 
 router.get('/:url', (req, res, next)=> {
   Timer.getTimerData(req.params.url)
-    .then((data)=> res.render('timer', { data }))
+    .then((data)=> {
+      if (!data) return res.render('error', { err: 'Timer not found!' });
+      res.render('timer', { data })
+    })
     .catch(next);
 })
 

@@ -3,6 +3,7 @@ const drawTimerForm = config=> {
     <form action="/" method="POST">
       <div class="name">
         <label for="title">Title</label>
+        <input name="title" type="text"></input>
       </div>
 
       <div class="date">
@@ -17,6 +18,8 @@ const drawTimerForm = config=> {
         <input name="weekedays" type="checkbox" checked>Weekdays</input>
         <input name="weekends" type="checkbox" checked>Weekends</input>
       </div>
+
+      <div class="error"></div>
 
       <input type="submit" value="Gimme a timer!"></input>
     </form>
@@ -39,26 +42,22 @@ const drawTimerForm = config=> {
 
   drawRegExInput({
     parent: $date,
-    regex: /^([1-9]|0[1-9]|[1-2][0-2])\/([1-9]|0[1-9]|1[0-9]|2[0-9]|3[0-1])\/([1-9]{2}|[1-9]{3}|[1-9]{4})$/g
+    name: 'date',
+    regex: /^([1-9]|0[1-9]|[1-2][0-2])\/([1-9]|0[1-9]|1[0-9]|2[0-9]|3[0-1])\/([1-9]{2}|[1-9]{3}|[1-9]{4})$/g,
+    placeholder: '12/10/1815'
   })
 
   drawRegExInput({
     parent: $time,
-    regex: /^([1-9]|0[1-9]|1[0-2]):([0-9]|[0-5][0-9])(:([0-5][0-9]|[0-9]))?$/g
+    name: 'time',
+    regex: /^([1-9]|0[1-9]|1[0-2]):([0-9]|[0-5][0-9])(:([0-5][0-9]|[0-9]))?$/g,
+    placeholder: '04:08:15'
   })
-
 
   drawOption({
     parent: $time,
     name: 'ampm',
     options: [{ name: 'am', value: 'am' }, { name: 'pm', value: 'pm' }],
-    default: now.getHours() >= 12 ? 'pm' : 'am'
-  })
-
-  drawViewCheck({
-    parent: $options,
-    name: 'Show time',
-    viewElement: $time
   })
 
   $(config.parent).append($html);
@@ -73,7 +72,7 @@ const drawRegExInput = config=> {
   */
   let template = `
     <div>
-      <input type="text"></input>
+      <input type="text" name="${config.name}" placeholder=${config.placeholder}></input>
       <div></div>
     </div>
   `;
@@ -81,9 +80,9 @@ const drawRegExInput = config=> {
   let $html = $(template),
     $input = $html.find('input'),
     $error = $html.find('div');
-  
+
   $html.on('keyup', 'input', function() {
-    if ($input.val().match(config.regex) == null) $error.html('Invalid format!');
+    if (!$input.val().match(config.regex)) $error.html('Invalid format!');
     else $error.html('');
   })
 
@@ -106,27 +105,6 @@ const drawOption = config=> {
     $html.append($(`
       <option value=${option.value}>${option.name}</option>
     `))
-  })
-
-  if (config.default) $html.val(config.default);
-  $(config.parent).append($html);
-}
-
-const drawViewCheck = config=> {
-  /*
-    parent
-    name
-    viewElement
-    default: false
-  */
-  let template = `
-    <input name="${config.name}" type="checkbox" ${config.default ? 'checked' : ''}>${config.name}</input>
-  `;
-
-  let $html = $(template);
-  !config.default ? $(config.viewElement).hide() : $(config.viewElement).show();
-  $html.on('click', function(e) {
-    $(config.viewElement).toggle();
   })
 
   $(config.parent).append($html);
