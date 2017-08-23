@@ -1,6 +1,6 @@
 
 const expect = require('chai').expect;
-const conn = require('../../models/_db')
+const conn = require('../../models/_db');
 const models = require('../../models').models;
 const Timer = models.Timer;
 
@@ -25,35 +25,33 @@ describe('Timer', ()=> {
 
 
   describe('gets', ()=> {
-    let timer1, timer2, timer3;
+    let timer1Url, timer2Url, timer3Url;
     beforeEach(()=> {
       return Promise.all([
         Timer.addNewTimer({
           minute: "56",
           second: "32",
-          options: {
-            weekdays: "true",
-            weekends: "false"
-          },
-          name: "timer1"
+          weekdays: "true",
+          weekends: "false",
+          title: "timer1"
         }),
         Timer.addNewTimer({
           minute: "56",
           second: "32",
-          name: "timer2"
+          title: "timer2"
         }),
         Timer.addNewTimer({
-          name: "timer1"
+          title: "timer3"
         })
-      ]).then(timers=> {
-        timer1 = timers[0];
-        timer2 = timers[1];
-        timer3 = timers[2];
+      ]).then(timerUrls=> {
+        timer1Url = timerUrls[0];
+        timer2Url = timerUrls[1];
+        timer3Url = timerUrls[2];
       })
     })
 
     it('a timer by url', ()=> {
-      return Timer.getTimerData(timer1.url)
+      return Timer.getTimerData(timer1Url)
         .then(timer=> {
           expect(timer).to.be.ok;
         })
@@ -74,16 +72,17 @@ describe('Timer', ()=> {
           weekdays: "true",
           weekends: "false"
         },
-        name: "My@@    awesome*!$ timer   +)_"
-      }).then(timer=> {
-        console.log(timer.url);
-        expect(timer).to.be.ok;
+        title: "My@@    awesome*!$ timer   +)_"
+      }).then(timerUrl=> {
+        expect(timerUrl).to.be.ok;
       })
     })
 
     it('deletes a timer by id', ()=> {
       return Timer.addNewTimer({
-        name: "My@@    awesome*!$ timer   +)_"
+        title: "My@@    awesome*!$ timer   +)_",
+      }).then(timerUrl=> {
+        return Timer.getTimerData(timerUrl)
       }).then(timer=> {
         return Timer.deleteOne(timer.id)
       }).then(timer=> {
