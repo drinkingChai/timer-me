@@ -7,17 +7,22 @@ router.get('/', (req, res, next)=> {
 
 router.post('/', (req, res, next)=> {
   Timer.addNewTimer(req.body)
-    .then((url)=> res.redirect(`/${url}`));
+    .then((url)=> {
+      res.redirect(`/${url}`)
+    })
+    .catch(next);
 })
 
 router.get('/:url', (req, res, next)=> {
   Timer.getTimerData(req.params.url)
-    .then((data)=> res.render('timer', data));
+    .then((data)=> res.render('timer', { data }))
+    .catch(next);
 })
 
 router.delete('/:id', (req, res, next)=> {
   Timer.deleteOne(req.params.id)
-    .then(()=> res.redirect('/'));
+    .then(()=> res.redirect('/'))
+    .catch(next);
 })
 
 // lets write some routes!

@@ -14,10 +14,12 @@ nunjucks.configure('views', { noCache: true });
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
+app.use('/jquery', express.static('node_modules/jquery/dist'))
 
 app.use(routes);
 
 app.use((err, req, res, next)=> {
+  console.log('called');
   res.render('error', { err });
 })
 

@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+Your timer
+<a href="{{ data.url }}">{{data.url}}</a>
+Time left!
+{{ data.expire }}
+
+{% endblock %}
