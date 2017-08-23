@@ -6,15 +6,15 @@ Timer app to count down.
 
 - Holidays from [holidayapi.com](http://holidayapi.com)
 - Choose what to show from:
-- Days
-  - Weekdays
-  - Weekends
+- Displays
   - Weeks
-  - Months
+  - Days
   - Hours
   - Minutes
   - Seconds
+- Options
+  - Include Weekdays
+  - Include Weekends
 
 #### Future
-- User defined patterns
 - Email alerts
