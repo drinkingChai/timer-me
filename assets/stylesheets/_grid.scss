@@ -53,6 +53,7 @@ label, input, select {
   margin-bottom: 0.6em;
   font-size: 1em;
   padding: 0.7em;
+  border-radius: 2px;
 }
 
 label { font-weight: bold; }
@@ -177,10 +178,19 @@ $view-height: create-vh();
   .col-md-#{$i} {
     @include make-media-max($breakpoint-lg) { @include make-col($i); };
   }
+  .col-md-offset-#{$i} {
+    @include make-media-max($breakpoint-lg) { @include make-col-offset($i); };
+  }
   .col-sm-#{$i} {
     @include make-media-max($breakpoint-sm) {
       @include make-col($i);
       margin-bottom: 1.3em;
+      padding-left: 0;
+    };
+  }
+  .col-sm-offset-#{$i} {
+    @include make-media-max($breakpoint-sm) {
+      @include make-col-offset($i);
       padding-left: 0;
     };
   }

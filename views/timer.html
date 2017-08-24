@@ -2,10 +2,9 @@
 
 {% block content %}
 
-Your timer
-<a href="{{ data.url }}">{{data.url}}</a>
-Time left!
-<!-- {{ data.expire }} -->
+<h3>Your timer link is <a href="{{ data.url }}">{{data.url}}</a></h3>
+<!-- different message for expired timers -->
+<!-- This timer has expired, it will be deleted in 5 days -->
 <div id='timer'></div>
 
 <!-- not to render -->

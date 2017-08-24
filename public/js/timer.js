@@ -51,38 +51,48 @@ const drawTimer = config=> {
   */
   let template = `
     <div>
-      <div>Timer to: ${config.to}</div>
-      <section></section>
+      <h3>Timer to: ${config.to.toDateString()} @ ${config.to.toLocaleString().split(',')[1]}</h3>
+      <div class='sections'>
+        <section class="daysleft"></section>
+        <section class="timeleft"></section>
+        <section class="totaldays"></section>
+      </div>
+      <div class="message"></div>
     </div>
   `;
 
-  let $html = $(template);
+  let $html = $(template),
+    $message = $html.find('.message');
+
 
   if (!config.weekends) {
-    $html.append(`
+    $message.append(`
       <div>Without weekends</div>
     `);
   }
 
   if (!config.weekdays) {
-    $html.append(`
-      <div class='weekdays'>Without weekdays</div>
+    $message.append(`
+      <div>Without weekdays</div>
     `);
   }
 
-  let $section = $html.find('section');
+  let $daysleft = $html.find('.daysleft'),
+    $timeleft = $html.find('.timeleft'),
+    $totaldays = $html.find('totaldays'),
+    $sections = $html.find('section');
 
   const updateTime = ()=> {
     setTimeout(function() {
       let now = new Date();
       let diff = calcDiff(now, config.to, config.weekdays, config.weekends, config.weekdayCount);
-      $section.empty();
-      drawCountDown( $section, 'seconds', diff.seconds);
-      drawCountDown($section, 'minutes', diff.minutes);
-      drawCountDown($section, 'hours', diff.hours);
-      drawCountDown($section, 'days', diff.days);
-      drawCountDown($section, 'weeks', diff.weeks);
-      if (!config.weekends || !config.weekdays) drawCountDown($section, 'total days', diff.totaldays);
+      $sections.empty();
+      drawCountDown($timeleft, 'hours : ', diff.hours);
+      drawCountDown($timeleft, 'minutes : ', diff.minutes);
+      drawCountDown($timeleft, 'seconds', diff.seconds);
+      drawCountDown($daysleft, 'days', diff.days);
+      drawCountDown($daysleft, 'weeks', diff.weeks);
+      if (!config.weekends || !config.weekdays) drawCountDown($totaldays, 'total days', diff.totaldays);
       updateTime();
     }, 1000);
   }
@@ -97,10 +107,10 @@ const drawCountDown = (parent, label, value)=> {
     value
   */
   let template = `
-    <div>
-      <span>${label}</span>
+    <span>
       <span>${value}</span>
-    </div>
+      <span>${label}</span>
+    </span>
   `;
 
   let $html = $(template);
@@ -113,8 +123,6 @@ $.getJSON(`/json/${$('timer').data().url}`, data=> {
   // draw timer
   let now = new Date(),
     weekdayCount = calcDays(now, new Date(data.expire));
-
-  console.log(data);
 
   drawTimer({
     parent: '#timer',

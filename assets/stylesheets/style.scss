@@ -1,21 +1,23 @@
 @import "_colors.scss";
 @import "_grid.scss";
-@import url('https://fonts.googleapis.com/css?family=Roboto|Zilla+Slab');
+@import url('https://fonts.googleapis.com/css?family=Roboto|Zilla+Slab|Zilla+Slab+Highlight');
 
 /*
   Reference
   font-family: 'Zilla Slab', cursive;
+  font-family: 'Zilla Slab Highlight', cursive;
   font-family: 'Roboto', sans-serif;
 */
 
 
 * { font-family: 'Roboto', sans-serif; }
 
-h1, h2, h3 { font-family: 'Zilla Slab', cursive; }
+h1, h2, h3, h4 { font-family: 'Zilla Slab', cursive; }
 h1 { font-size: 3em; }
 h3 { font-size: 1.2em; }
+h4 { font-size: 1.1em; }
 
-header, main h3 { text-align: center; }
+header, main h3, main h4 { text-align: center; }
 
 select { width: 100%; }
 
@@ -43,6 +45,17 @@ input[type=text] {
   margin-top: $gutter * 2;
 
   & input { background-color: $primary; }
+}
+#timer {
+  text-align: center;
+}
+.sections {
+  font-size: 1.5em;
+  line-height: 1.5em;
+  margin-top: 2em;
+}
+.sections * {
+  font-family: 'Zilla Slab Highlight', cursive;
 }
 // input[name=time] {
 //   width: 70%;
