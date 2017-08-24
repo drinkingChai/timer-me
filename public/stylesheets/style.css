@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Roboto|Zilla+Slab");
 html {
   font-size: 16px; }
 
@@ -52,7 +53,7 @@ input[type="checkbox"] {
   width: 2em;
   height: 2em; }
 
-input[type="checkbox"]:checked:after {
+input[type="checkbox"]:after {
   background-color: #37474f;
   display: flex;
   flex-direction: column;
@@ -61,7 +62,11 @@ input[type="checkbox"]:checked:after {
   width: 100%;
   height: 100%;
   justify-content: center;
-  text-align: center; }
+  text-align: center;
+  visibility: hidden; }
+
+input[type="checkbox"]:checked:after {
+  visibility: visible; }
 
 .btn {
   padding: 0.7em;
@@ -80,19 +85,25 @@ input[type="checkbox"]:checked:after {
 @media (min-width: 1200px) {
   .col-1 {
     float: left;
-    width: 10%;
+    width: 8.33333%;
+    padding: 0 20px; } }
+
+@media (min-width: 1200px) {
+  .col-offset-1 {
+    float: left;
+    margin-left: 8.33333%;
     padding: 0 20px; } }
 
 @media (max-width: 1200px) {
   .col-md-1 {
     float: left;
-    width: 10%;
+    width: 8.33333%;
     padding: 0 20px; } }
 
 @media (max-width: 768px) {
   .col-sm-1 {
     float: left;
-    width: 10%;
+    width: 8.33333%;
     padding: 0 20px;
     margin-bottom: 1.3em;
     padding-left: 0; } }
@@ -100,19 +111,25 @@ input[type="checkbox"]:checked:after {
 @media (min-width: 1200px) {
   .col-2 {
     float: left;
-    width: 20%;
+    width: 16.66667%;
+    padding: 0 20px; } }
+
+@media (min-width: 1200px) {
+  .col-offset-2 {
+    float: left;
+    margin-left: 16.66667%;
     padding: 0 20px; } }
 
 @media (max-width: 1200px) {
   .col-md-2 {
     float: left;
-    width: 20%;
+    width: 16.66667%;
     padding: 0 20px; } }
 
 @media (max-width: 768px) {
   .col-sm-2 {
     float: left;
-    width: 20%;
+    width: 16.66667%;
     padding: 0 20px;
     margin-bottom: 1.3em;
     padding-left: 0; } }
@@ -120,19 +137,25 @@ input[type="checkbox"]:checked:after {
 @media (min-width: 1200px) {
   .col-3 {
     float: left;
-    width: 30%;
+    width: 25%;
+    padding: 0 20px; } }
+
+@media (min-width: 1200px) {
+  .col-offset-3 {
+    float: left;
+    margin-left: 25%;
     padding: 0 20px; } }
 
 @media (max-width: 1200px) {
   .col-md-3 {
     float: left;
-    width: 30%;
+    width: 25%;
     padding: 0 20px; } }
 
 @media (max-width: 768px) {
   .col-sm-3 {
     float: left;
-    width: 30%;
+    width: 25%;
     padding: 0 20px;
     margin-bottom: 1.3em;
     padding-left: 0; } }
@@ -140,19 +163,25 @@ input[type="checkbox"]:checked:after {
 @media (min-width: 1200px) {
   .col-4 {
     float: left;
-    width: 40%;
+    width: 33.33333%;
+    padding: 0 20px; } }
+
+@media (min-width: 1200px) {
+  .col-offset-4 {
+    float: left;
+    margin-left: 33.33333%;
     padding: 0 20px; } }
 
 @media (max-width: 1200px) {
   .col-md-4 {
     float: left;
-    width: 40%;
+    width: 33.33333%;
     padding: 0 20px; } }
 
 @media (max-width: 768px) {
   .col-sm-4 {
     float: left;
-    width: 40%;
+    width: 33.33333%;
     padding: 0 20px;
     margin-bottom: 1.3em;
     padding-left: 0; } }
@@ -160,19 +189,25 @@ input[type="checkbox"]:checked:after {
 @media (min-width: 1200px) {
   .col-5 {
     float: left;
-    width: 50%;
+    width: 41.66667%;
+    padding: 0 20px; } }
+
+@media (min-width: 1200px) {
+  .col-offset-5 {
+    float: left;
+    margin-left: 41.66667%;
     padding: 0 20px; } }
 
 @media (max-width: 1200px) {
   .col-md-5 {
     float: left;
-    width: 50%;
+    width: 41.66667%;
     padding: 0 20px; } }
 
 @media (max-width: 768px) {
   .col-sm-5 {
     float: left;
-    width: 50%;
+    width: 41.66667%;
     padding: 0 20px;
     margin-bottom: 1.3em;
     padding-left: 0; } }
@@ -180,19 +215,25 @@ input[type="checkbox"]:checked:after {
 @media (min-width: 1200px) {
   .col-6 {
     float: left;
-    width: 60%;
+    width: 50%;
+    padding: 0 20px; } }
+
+@media (min-width: 1200px) {
+  .col-offset-6 {
+    float: left;
+    margin-left: 50%;
     padding: 0 20px; } }
 
 @media (max-width: 1200px) {
   .col-md-6 {
     float: left;
-    width: 60%;
+    width: 50%;
     padding: 0 20px; } }
 
 @media (max-width: 768px) {
   .col-sm-6 {
     float: left;
-    width: 60%;
+    width: 50%;
     padding: 0 20px;
     margin-bottom: 1.3em;
     padding-left: 0; } }
@@ -200,19 +241,25 @@ input[type="checkbox"]:checked:after {
 @media (min-width: 1200px) {
   .col-7 {
     float: left;
-    width: 70%;
+    width: 58.33333%;
+    padding: 0 20px; } }
+
+@media (min-width: 1200px) {
+  .col-offset-7 {
+    float: left;
+    margin-left: 58.33333%;
     padding: 0 20px; } }
 
 @media (max-width: 1200px) {
   .col-md-7 {
     float: left;
-    width: 70%;
+    width: 58.33333%;
     padding: 0 20px; } }
 
 @media (max-width: 768px) {
   .col-sm-7 {
     float: left;
-    width: 70%;
+    width: 58.33333%;
     padding: 0 20px;
     margin-bottom: 1.3em;
     padding-left: 0; } }
@@ -220,19 +267,25 @@ input[type="checkbox"]:checked:after {
 @media (min-width: 1200px) {
   .col-8 {
     float: left;
-    width: 80%;
+    width: 66.66667%;
+    padding: 0 20px; } }
+
+@media (min-width: 1200px) {
+  .col-offset-8 {
+    float: left;
+    margin-left: 66.66667%;
     padding: 0 20px; } }
 
 @media (max-width: 1200px) {
   .col-md-8 {
     float: left;
-    width: 80%;
+    width: 66.66667%;
     padding: 0 20px; } }
 
 @media (max-width: 768px) {
   .col-sm-8 {
     float: left;
-    width: 80%;
+    width: 66.66667%;
     padding: 0 20px;
     margin-bottom: 1.3em;
     padding-left: 0; } }
@@ -240,19 +293,25 @@ input[type="checkbox"]:checked:after {
 @media (min-width: 1200px) {
   .col-9 {
     float: left;
-    width: 90%;
+    width: 75%;
+    padding: 0 20px; } }
+
+@media (min-width: 1200px) {
+  .col-offset-9 {
+    float: left;
+    margin-left: 75%;
     padding: 0 20px; } }
 
 @media (max-width: 1200px) {
   .col-md-9 {
     float: left;
-    width: 90%;
+    width: 75%;
     padding: 0 20px; } }
 
 @media (max-width: 768px) {
   .col-sm-9 {
     float: left;
-    width: 90%;
+    width: 75%;
     padding: 0 20px;
     margin-bottom: 1.3em;
     padding-left: 0; } }
@@ -260,17 +319,75 @@ input[type="checkbox"]:checked:after {
 @media (min-width: 1200px) {
   .col-10 {
     float: left;
-    width: 100%;
+    width: 83.33333%;
+    padding: 0 20px; } }
+
+@media (min-width: 1200px) {
+  .col-offset-10 {
+    float: left;
+    margin-left: 83.33333%;
     padding: 0 20px; } }
 
 @media (max-width: 1200px) {
   .col-md-10 {
     float: left;
-    width: 100%;
+    width: 83.33333%;
     padding: 0 20px; } }
 
 @media (max-width: 768px) {
   .col-sm-10 {
+    float: left;
+    width: 83.33333%;
+    padding: 0 20px;
+    margin-bottom: 1.3em;
+    padding-left: 0; } }
+
+@media (min-width: 1200px) {
+  .col-11 {
+    float: left;
+    width: 91.66667%;
+    padding: 0 20px; } }
+
+@media (min-width: 1200px) {
+  .col-offset-11 {
+    float: left;
+    margin-left: 91.66667%;
+    padding: 0 20px; } }
+
+@media (max-width: 1200px) {
+  .col-md-11 {
+    float: left;
+    width: 91.66667%;
+    padding: 0 20px; } }
+
+@media (max-width: 768px) {
+  .col-sm-11 {
+    float: left;
+    width: 91.66667%;
+    padding: 0 20px;
+    margin-bottom: 1.3em;
+    padding-left: 0; } }
+
+@media (min-width: 1200px) {
+  .col-12 {
+    float: left;
+    width: 100%;
+    padding: 0 20px; } }
+
+@media (min-width: 1200px) {
+  .col-offset-12 {
+    float: left;
+    margin-left: 100%;
+    padding: 0 20px; } }
+
+@media (max-width: 1200px) {
+  .col-md-12 {
+    float: left;
+    width: 100%;
+    padding: 0 20px; } }
+
+@media (max-width: 768px) {
+  .col-sm-12 {
     float: left;
     width: 100%;
     padding: 0 20px;
@@ -280,5 +397,47 @@ input[type="checkbox"]:checked:after {
 [class*='col-']:last-of-type {
   padding-right: 0; }
 
+/*
+  Reference
+  font-family: 'Zilla Slab', cursive;
+  font-family: 'Roboto', sans-serif;
+*/
+* {
+  font-family: 'Roboto', sans-serif; }
+
+h1, h2, h3 {
+  font-family: 'Zilla Slab', cursive; }
+
+h1 {
+  font-size: 3em; }
+
+h3 {
+  font-size: 1.2em; }
+
+header, main h3 {
+  text-align: center; }
+
 select {
-  width: 7em; }
+  width: 100%; }
+
+input[type=text] {
+  width: 100%;
+  text-align: center; }
+
+.time [class*="col-"] {
+  padding-left: 0; }
+
+.options {
+  text-align: center; }
+  .options input[type=checkbox] {
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 10px; }
+
+.submit {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 40px; }
+  .submit input {
+    background-color: #f06292; }

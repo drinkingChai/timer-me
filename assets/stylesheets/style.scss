@@ -1,4 +1,54 @@
 @import "_colors.scss";
 @import "_grid.scss";
+@import url('https://fonts.googleapis.com/css?family=Roboto|Zilla+Slab');
 
-select { width: 7em; }
+/*
+  Reference
+  font-family: 'Zilla Slab', cursive;
+  font-family: 'Roboto', sans-serif;
+*/
+
+
+* { font-family: 'Roboto', sans-serif; }
+
+h1, h2, h3 { font-family: 'Zilla Slab', cursive; }
+h1 { font-size: 3em; }
+h3 { font-size: 1.2em; }
+
+header, main h3 { text-align: center; }
+
+select { width: 100%; }
+
+input[type=text] {
+  width: 100%;
+  text-align: center;
+}
+
+.time {
+  & [class*="col-"] { padding-left: 0; }
+}
+.options {
+  text-align: center;
+
+  & input[type=checkbox] {
+    display: inline-block;
+    margin-left: $gutter;
+    margin-right: $gutter / 2;
+  }
+}
+.submit {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: $gutter * 2;
+
+  & input { background-color: $primary; }
+}
+// input[name=time] {
+//   width: 70%;
+//   display: inline-block;
+// }
+// input[name=ampm] {
+//   width: 30%;
+//   display: inline-block;
+// }

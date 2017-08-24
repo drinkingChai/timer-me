@@ -18,3 +18,6 @@ Timer app to count down.
 
 #### Future
 - Email alerts
+
+##### Dev Notes
+- Includes newest _grid 08-24-17

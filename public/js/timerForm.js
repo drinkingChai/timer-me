@@ -2,27 +2,27 @@ const drawTimerForm = config=> {
   let template = `
     <form action="/" method="POST">
       <div class="name">
-        <label for="title">Title</label>
-        <input name="title" type="text" placeholder="My awesome timer"></input>
+        <h3>Title</h3>
+        <input name="title" type="text" placeholder="my awesome timer"></input>
       </div>
 
       <div class="date">
-      Date
+        <h3>Date</h3>
       </div>
 
-      <div class="time">
-      Time
+      <div class="time row">
+        <h3>Time</h3>
       </div>
 
       <div class="options">
-        Includes
+        <h3>Includes</h3>
         <input name="weekdays" type="checkbox" checked>Weekdays</input>
         <input name="weekends" type="checkbox" checked>Weekends</input>
       </div>
 
-      <div class="error"></div>
-
-      <input type="submit" value="Gimme a timer!"></input>
+      <div class="submit">
+        <input type="submit" value="Gimme a timer!"></input>
+      </div>
     </form>
   `;
 
@@ -38,13 +38,13 @@ const drawTimerForm = config=> {
     $time = $html.find('.time'),
     $options = $html.find('.options');
 
-  // ^([1-9]|0[1-9]|[1-2][0-2])\/([1-9]|0[1-9]|1[0-9]|2[0-9]|3[0-1])\/([1-9]{2}|[1-9]{3}|[1-9]{4})$ date
+  // ^([1-9]|0[1-9]|[1-2][0-2])\/([1-9]|0[1-9]|1[0-9]|2[0-9]|3[0-1])\/([1-9][0-9]|[1-9][0-9]{2}|[1-9][0-9]{3})$ date
   // ^([1-9]|0[1-9]|1[0-2]):([0-9]|[0-5][0-9])(:([0-5][0-9]|[0-9]))?$ time
 
   drawRegExInput({
     parent: $date,
     name: 'date',
-    regex: /^([1-9]|0[1-9]|[1-2][0-2])\/([1-9]|0[1-9]|1[0-9]|2[0-9]|3[0-1])\/([1-9]{2}|[1-9]{3}|[1-9]{4})$/g,
+    regex: /^([1-9]|0[1-9]|[1-2][0-2])\/([1-9]|0[1-9]|1[0-9]|2[0-9]|3[0-1])\/([1-9][0-9]|[1-9][0-9]{2}|[1-9][0-9]{3})$/g,
     placeholder: '12/10/1815'
   })
 
@@ -52,13 +52,15 @@ const drawTimerForm = config=> {
     parent: $time,
     name: 'time',
     regex: /^([1-9]|0[1-9]|1[0-2]):([0-9]|[0-5][0-9])(:([0-5][0-9]|[0-9]))?$/g,
-    placeholder: '04:08:15'
+    placeholder: '04:08:15',
+    class: 'col-8'
   })
 
   drawOption({
     parent: $time,
     name: 'ampm',
     options: [{ name: 'AM', value: 'am' }, { name: 'PM', value: 'pm' }],
+    class: 'col-4'
   })
 
   $(config.parent).append($html);
@@ -72,7 +74,7 @@ const drawRegExInput = config=> {
     draws a verification text underneath
   */
   let template = `
-    <div>
+    <div class="${config.class}">
       <input type="text" name="${config.name}" placeholder=${config.placeholder}></input>
       <div></div>
     </div>
@@ -98,12 +100,15 @@ const drawOption = config=> {
     default
   */
   let template = `
-    <select name="${config.name}"></select>
+    <div class="${config.class}">
+      <select name="${config.name}"></select>
+    </div>
   `;
 
-  let $html = $(template);
+  let $html = $(template),
+    $select = $html.find('select');
   config.options.forEach(option=> {
-    $html.append($(`
+    $select.append($(`
       <option value=${option.value}>${option.name}</option>
     `))
   })
