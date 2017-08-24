@@ -4,9 +4,8 @@ Timer app to count down.
 
 #### Features
 
-- Holidays from [holidayapi.com](http://holidayapi.com)
-- Choose what to show from:
 - Displays
+  - Months
   - Weeks
   - Days
   - Hours
@@ -17,10 +16,14 @@ Timer app to count down.
   - Include Weekends
 
 #### Future
+
+- Holidays from [holidayapi.com](http://holidayapi.com)
 - Email alerts
 
 #### Demo
+
 [whenwillit.herokuapp.com](https://whenwillit.herokuapp.com/)
 
 ##### Dev Notes
+
 - Includes newest _grid 08-24-17
