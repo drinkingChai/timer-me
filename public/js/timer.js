@@ -9,7 +9,8 @@ const calcDiff = (t1, t2, wkds, wknds, count)=> {
     minutes = Math.floor(diff / 60) % 60,
     hours = Math.floor(diff / 60 / 60) % 24,
     days = Math.floor(diff / 60 / 60 / 24) % 7,
-    weeks = Math.floor(diff / 60 / 60 / 24 / 7),
+    weeks = Math.floor(diff / 60 / 60 / 24 / 7) % 4,
+    months = Math.floor(diff / 60 / 60 / 24 / 7 / 4),
     totaldays = Math.floor(diff / 60 / 60 / 24);
 
   return {
@@ -18,6 +19,7 @@ const calcDiff = (t1, t2, wkds, wknds, count)=> {
     hours,
     days,
     weeks,
+    months,
     totaldays
   }
 }
@@ -79,7 +81,7 @@ const drawTimer = config=> {
 
   let $daysleft = $html.find('.daysleft'),
     $timeleft = $html.find('.timeleft'),
-    $totaldays = $html.find('totaldays'),
+    $totaldays = $html.find('.totaldays'),
     $sections = $html.find('section');
 
   const updateTime = ()=> {
@@ -87,11 +89,12 @@ const drawTimer = config=> {
       let now = new Date();
       let diff = calcDiff(now, config.to, config.weekdays, config.weekends, config.weekdayCount);
       $sections.empty();
-      drawCountDown($timeleft, 'hours : ', diff.hours);
-      drawCountDown($timeleft, 'minutes : ', diff.minutes);
-      drawCountDown($timeleft, 'seconds', diff.seconds);
-      drawCountDown($daysleft, 'weeks', diff.weeks);
-      drawCountDown($daysleft, 'days', diff.days);
+      drawCountDown($timeleft, 'h : ', diff.hours);
+      drawCountDown($timeleft, 'm : ', diff.minutes);
+      drawCountDown($timeleft, 's', diff.seconds);
+      drawCountDown($daysleft, 'months ', diff.months);
+      drawCountDown($daysleft, 'weeks ', diff.weeks);
+      drawCountDown($daysleft, 'days ', diff.days);
       if (!config.weekends || !config.weekdays) drawCountDown($totaldays, 'total days', diff.totaldays);
       updateTime();
     }, 1000);
@@ -107,10 +110,7 @@ const drawCountDown = (parent, label, value)=> {
     value
   */
   let template = `
-    <span>
-      <span>${value}</span>
-      <span>${label}</span>
-    </span>
+    <span>${value} ${label}</span>
   `;
 
   let $html = $(template);

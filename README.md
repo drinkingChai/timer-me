@@ -19,5 +19,8 @@ Timer app to count down.
 #### Future
 - Email alerts
 
+#### Demo
+[whenwillit.herokuapp.com](https://whenwillit.herokuapp.com/)
+
 ##### Dev Notes
 - Includes newest _grid 08-24-17
