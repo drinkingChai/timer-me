@@ -47,7 +47,9 @@ Timer.addNewTimer = data=> {
 
     return Timer.create({
       expire: datetime,
-      url: url
+      url: url,
+      weekdays: data.weekdays,
+      weekends: data.weekends
     })
   }).then(timer=> {
     return timer.url;
