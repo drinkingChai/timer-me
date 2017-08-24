@@ -124,6 +124,14 @@ input[type="checkbox"]:checked:after {
   visibility: visible;
 }
 
+// hr
+hr {
+  color: $primary;
+  background-color: $primary;
+  border-color: $primary;
+  border-width: 1px;
+}
+
 // buttons
 .btn {
   padding: 0.7em;
@@ -176,20 +184,22 @@ $view-height: create-vh();
     @include make-media-min($breakpoint-lg) { @include make-col-offset($i); };
   }
   .col-md-#{$i} {
-    @include make-media-max($breakpoint-lg) { @include make-col($i); };
+    // @include make-media-max($breakpoint-lg) { @include make-col($i); };
+    @include make-media($breakpoint-md, $breakpoint-lg) { @include make-col($i); };
   }
   .col-md-offset-#{$i} {
-    @include make-media-max($breakpoint-lg) { @include make-col-offset($i); };
+    // @include make-media-max($breakpoint-lg) { @include make-col-offset($i); };
+    @include make-media($breakpoint-md, $breakpoint-lg) { @include make-col-offset($i); };
   }
   .col-sm-#{$i} {
-    @include make-media-max($breakpoint-sm) {
+    @include make-media(0px, $breakpoint-md) {
       @include make-col($i);
       margin-bottom: 1.3em;
       padding-left: 0;
     };
   }
   .col-sm-offset-#{$i} {
-    @include make-media-max($breakpoint-sm) {
+    @include make-media(0px, $breakpoint-md) {
       @include make-col-offset($i);
       padding-left: 0;
     };

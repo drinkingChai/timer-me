@@ -8,3 +8,7 @@ $breakpoint-lg: 1200px;
 @mixin make-media-max($width) {
   @media (max-width: $width) { @content; }
 }
+
+@mixin make-media($min, $max) {
+  @media (min-width: $min) and (max-width: $max)  { @content; }
+}

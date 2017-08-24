@@ -90,8 +90,8 @@ const drawTimer = config=> {
       drawCountDown($timeleft, 'hours : ', diff.hours);
       drawCountDown($timeleft, 'minutes : ', diff.minutes);
       drawCountDown($timeleft, 'seconds', diff.seconds);
-      drawCountDown($daysleft, 'days', diff.days);
       drawCountDown($daysleft, 'weeks', diff.weeks);
+      drawCountDown($daysleft, 'days', diff.days);
       if (!config.weekends || !config.weekdays) drawCountDown($totaldays, 'total days', diff.totaldays);
       updateTime();
     }, 1000);

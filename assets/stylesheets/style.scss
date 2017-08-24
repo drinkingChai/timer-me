@@ -18,6 +18,7 @@ h3 { font-size: 1.2em; }
 h4 { font-size: 1.1em; }
 
 header, main h3, main h4 { text-align: center; }
+header { margin-top: 5%; }
 
 select { width: 100%; }
 
@@ -26,23 +27,44 @@ input[type=text] {
   text-align: center;
 }
 
+body { position: relative; min-height: 85vh; }
+footer {
+  position: relative;
+  bottom: 0;
+  width: 50%;
+  left: 25%;
+  margin-top: 10%;
+  text-align: center;
+  margin-bottom: 1em;
+  font-family: 'Zilla Slab Highlight', cursive;
+
+  & hr {
+    margin-bottom: 1em;
+  }
+}
+
 .time {
   & [class*="col-"] { padding-left: 0; }
 }
 .options {
   text-align: center;
 
+  & div {
+    display: inline-block;
+  }
+
   & input[type=checkbox] {
     display: inline-block;
     margin-left: $gutter;
     margin-right: $gutter / 2;
+    margin-bottom: $gutter;
   }
 }
 .submit {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: $gutter * 2;
+  margin-top: $gutter;
 
   & input { background-color: $primary; }
 }

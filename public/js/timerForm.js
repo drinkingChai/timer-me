@@ -3,7 +3,7 @@ const drawTimerForm = config=> {
     <form action="/" method="POST">
       <div class="name">
         <h3>Title</h3>
-        <input name="title" type="text" placeholder="my awesome timer"></input>
+        <input name="title" type="text" placeholder="my awesome timer" required></input>
       </div>
 
       <div class="date">
@@ -16,8 +16,12 @@ const drawTimerForm = config=> {
 
       <div class="options">
         <h3>Include</h3>
-        <input name="weekdays" type="checkbox" checked>Weekdays</input>
-        <input name="weekends" type="checkbox" checked>Weekends</input>
+        <div>
+          <input name="weekdays" type="checkbox" checked>Weekdays</input>
+        </div>
+        <div>
+          <input name="weekends" type="checkbox" checked>Weekends</input>
+        </div>
       </div>
 
       <div class="submit">
@@ -75,7 +79,7 @@ const drawRegExInput = config=> {
   */
   let template = `
     <div class="${config.class}">
-      <input type="text" name="${config.name}" placeholder=${config.placeholder}></input>
+      <input type="text" name="${config.name}" placeholder=${config.placeholder} required></input>
       <div></div>
     </div>
   `;
