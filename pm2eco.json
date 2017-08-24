@@ -1,0 +1,9 @@
+{
+  "apps": [{
+    "name": "when-will",
+    "script": "app.js",
+    "env": {
+      "DATABASE_URL": "postgres://localhost/whenwill"
+    }
+  }]
+}
