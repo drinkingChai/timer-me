@@ -3,7 +3,7 @@ const drawTimerForm = config=> {
     <form action="/" method="POST">
       <div class="name">
         <label for="title">Title</label>
-        <input name="title" type="text"></input>
+        <input name="title" type="text" placeholder="My awesome timer"></input>
       </div>
 
       <div class="date">
@@ -58,7 +58,7 @@ const drawTimerForm = config=> {
   drawOption({
     parent: $time,
     name: 'ampm',
-    options: [{ name: 'am', value: 'am' }, { name: 'pm', value: 'pm' }],
+    options: [{ name: 'AM', value: 'am' }, { name: 'PM', value: 'pm' }],
   })
 
   $(config.parent).append($html);
