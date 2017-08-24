@@ -114,11 +114,13 @@ $.getJSON(`/json/${$('timer').data().url}`, data=> {
   let now = new Date(),
     weekdayCount = calcDays(now, new Date(data.expire));
 
+  console.log(data);
+
   drawTimer({
     parent: '#timer',
     to: new Date(data.expire),
     weekdays: data.weekdays,
-    weekends: false,
+    weekends: data.weekends,
     weekdayCount
   })
 })

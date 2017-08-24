@@ -6,8 +6,10 @@ router.get('/', (req, res, next)=> {
 })
 
 router.post('/', (req, res, next)=> {
-  req.body.month -= 1; // month is +1
-  console.log(req.body)
+  console.log(req.body);
+  req.body.weekends = req.body.weekends ? true : false;
+  req.body.weekdays = req.body.weekdays ? true : false;
+  console.log(req.body);
   Timer.addNewTimer(req.body)
     .then((url)=> {
       res.redirect(`/${url}`)

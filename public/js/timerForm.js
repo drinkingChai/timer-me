@@ -16,7 +16,7 @@ const drawTimerForm = config=> {
 
       <div class="options">
         Includes
-        <input name="weekedays" type="checkbox" checked>Weekdays</input>
+        <input name="weekdays" type="checkbox" checked>Weekdays</input>
         <input name="weekends" type="checkbox" checked>Weekends</input>
       </div>
 
