@@ -1,0 +1,3 @@
+drawTimerForm({
+  parent: '#newTimer'
+})
