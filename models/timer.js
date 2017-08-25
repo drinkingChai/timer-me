@@ -35,7 +35,8 @@ const Timer = conn.define('timer', {
 })
 
 Timer.addNewTimer = data=> {
-  let datetime = new Date(`${data.date} ${data.time} ${data.ampm}`)
+  let datetime = new Date(`${data.date} ${data.time} ${data.ampm}`),
+    datetimeUTC = new Date(datetime.toUTCString());
 
   return Timer.findAll()
   .then(results=> {
@@ -46,7 +47,7 @@ Timer.addNewTimer = data=> {
     }
 
     return Timer.create({
-      expire: datetime,
+      expire: datetimeUTC,
       url: url,
       weekdays: data.weekdays,
       weekends: data.weekends
