@@ -1,4 +1,4 @@
-# When Will
+# Timer Me!
 
 Timer app to count down.
 
