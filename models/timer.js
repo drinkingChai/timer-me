@@ -35,7 +35,7 @@ const Timer = conn.define('timer', {
 })
 
 Timer.addNewTimer = data=> {
-  let datetime = new Date(`${data.date} ${data.time} ${data.ampm}`),
+  let datetime = new Date(`${data.date} ${data.time.length <= 2 ? data.time + ':0' : data.time} ${data.ampm}`),
     datetimeUTC = new Date(datetime.toUTCString());
 
   return Timer.findAll()
