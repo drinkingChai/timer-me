@@ -89,8 +89,8 @@ const drawRegExInput = config=> {
     $error = $html.find('div');
 
   $html.on('keyup', 'input', function() {
-    if (!$input.val().match(config.regex)) $error.html('Invalid format!');
-    else $error.html('');
+    if ($input.val().match(config.regex)) return $error.html('');
+    else if (!$error.html().length) $error.html('Invalid format!');
   })
 
   $(config.parent).append($html);
