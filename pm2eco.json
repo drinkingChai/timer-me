@@ -3,7 +3,7 @@
     "name": "when-will",
     "script": "app.js",
     "env": {
-      "PORT": "80",
+      "PORT": "4000",
       "DATABASE_URL": "postgres://localhost/whenwill"
     }
   }]
